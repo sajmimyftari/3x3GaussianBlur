@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<button onclick="blurImage()" class="button">Blur Image</button>
+
+<img id="scream" src="wallpaper.jpg" alt="The Scream" width="800" height="800">
+<canvas id="myCanvas" width="800" height="800">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+var blurImage = function(){
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("scream");
+    ctx.drawImage(img, 0, 0);    
+    var imgData = ctx.getImageData(0, 0, c.width, c.height);
+
+    var px = imgData.data;
+
+    var k1 = [[1, 2, 1],
+		     [2, 4, 2],
+		     [1, 2, 1]];
+
+    var w = img.width
+    var h = img.height
+
+
+    for (var x = 0; x < w; x++) {
+	for (var y = 0; y < h; y++) {
+
+        var ul = ((x-1+w)%w + w*((y-1+h)%h))*4; 
+        var uc = ((x-0+w)%w + w*((y-1+h)%h))*4; 
+        var ur = ((x+1+w)%w + w*((y-1+h)%h))*4; 
+        var ml = ((x-1+w)%w + w*((y+0+h)%h))*4; 
+        var mc = ((x-0+w)%w + w*((y+0+h)%h))*4; 
+        var mr = ((x+1+w)%w + w*((y+0+h)%h))*4; 
+        var ll = ((x-1+w)%w + w*((y+1+h)%h))*4; 
+        var lc = ((x-0+w)%w + w*((y+1+h)%h))*4; 
+        var lr = ((x+1+w)%w + w*((y+1+h)%h))*4; 
+
+        p0 = px[ul]*k1[0][0]; 
+        p1 = px[uc]*k1[0][1]; 
+        p2 = px[ur]*k1[0][2]; 
+        p3 = px[ml]*k1[1][0]; 
+        p4 = px[mc]*k1[1][1]; 
+        p5 = px[mr]*k1[1][2]; 
+        p6 = px[ll]*k1[2][0];
+        p7 = px[lc]*k1[2][1]; 
+        p8 = px[lr]*k1[2][2]; 
+        var red = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+            
+        p0 = px[ul+1]*k1[0][0]; 
+        p1 = px[uc+1]*k1[0][1]; 
+        p2 = px[ur+1]*k1[0][2]; 
+        p3 = px[ml+1]*k1[1][0]; 
+        p4 = px[mc+1]*k1[1][1]; 
+        p5 = px[mr+1]*k1[1][2]; 
+        p6 = px[ll+1]*k1[2][0]; 
+        p7 = px[lc+1]*k1[2][1]; 
+        p8 = px[lr+1]*k1[2][2]; 
+        var green = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+            
+        p0 = px[ul+2]*k1[0][0]; 
+        p1 = px[uc+2]*k1[0][1]; 
+        p2 = px[ur+2]*k1[0][2]; 
+        p3 = px[ml+2]*k1[1][0]; 
+        p4 = px[mc+2]*k1[1][1]; 
+        p5 = px[mr+2]*k1[1][2]; 
+        p6 = px[ll+2]*k1[2][0]; 
+        p7 = px[lc+2]*k1[2][1]; 
+        p8 = px[lr+2]*k1[2][2]; 
+        var blue = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+
+        // Blur only 1 color 
+          
+        if (px[mc] !== 243 
+            || px[mc+1] !== 83 
+            || px[mc+2] !== 37){
+                continue;
+            }
+        
+
+        px[mc] = red;
+        px[mc+1] = green;
+        px[mc+2] = blue;
+        px[mc+3] = px[lc+3];
+    }
+    }
+
+    ctx.putImageData(imgData, 0, 0);
+    img.remove()
+};
+</script>
+
+</body>
+</html>
