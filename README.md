@@ -3,8 +3,8 @@
 Changing the values like this makes it a Box Blur
 ```
     var k1 = [[1, 1, 1],
-		         [1, 1, 1],
-		          [1, 1, 1]];
+	      [1, 1, 1],
+	      [1, 1, 1]];
 
     var devide = 9
 ```
