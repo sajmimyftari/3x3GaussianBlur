@@ -1,6 +1,6 @@
 # 3x3GaussianBlur
 
-Changing the values of k1 to
+Changing the values like this
 ```
     var k1 = [[1, 1, 1],
 		         [1, 1, 1],
