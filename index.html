@@ -21,6 +21,8 @@ var blurImage = function(){
     var k1 = [[1, 2, 1],
 		     [2, 4, 2],
 		     [1, 2, 1]];
+	
+    var devide = 16
 
     var w = img.width
     var h = img.height
@@ -48,7 +50,7 @@ var blurImage = function(){
         p6 = px[ll]*k1[2][0];
         p7 = px[lc]*k1[2][1]; 
         p8 = px[lr]*k1[2][2]; 
-        var red = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+        var red = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/devide;
             
         p0 = px[ul+1]*k1[0][0]; 
         p1 = px[uc+1]*k1[0][1]; 
@@ -59,7 +61,7 @@ var blurImage = function(){
         p6 = px[ll+1]*k1[2][0]; 
         p7 = px[lc+1]*k1[2][1]; 
         p8 = px[lr+1]*k1[2][2]; 
-        var green = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+        var green = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/devide;
             
         p0 = px[ul+2]*k1[0][0]; 
         p1 = px[uc+2]*k1[0][1]; 
@@ -70,7 +72,7 @@ var blurImage = function(){
         p6 = px[ll+2]*k1[2][0]; 
         p7 = px[lc+2]*k1[2][1]; 
         p8 = px[lr+2]*k1[2][2]; 
-        var blue = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/16;
+        var blue = (p0+p1+p2+p3+p4+p5+p6+p7+p8)/devide;
 
         // Blur only 1 color 
           
