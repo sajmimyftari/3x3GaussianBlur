@@ -8,7 +8,7 @@ Changing the values like this makes it a Box Blur
 
     var devide = 9
 ```
-Without this code the algorithem will blur the entire image
+Without this code the algorithm will blur the entire image
 ```
         // Blur only 1 color 
           
